@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CSS, DHTML &amp; Ajax | Animating an object</title>
+<script type="text/javascript">
+var animateSpeed = 10;
+var object = null;
+var cX = null; 
+var cY = null; 
+var fX = null; 
+var fY = null; 
+var next = null;
+var radius = null;
+
+function initAnimateCircle(objectID,theRadius) {
+	object = document.getElementById(objectID);
+	radius = theRadius;
+	cX = fX =  object.offsetLeft;
+	cY = fY =  object.offsetTop;
+	next=1;
+	animateObjectCircle();
+}
+
+function animateObjectCircle()  {
+	if (next < 72) { 
+		var nX = cX + (Math.cos(next * (Math.PI/36)) * radius);
+		var nY = cY + (Math.sin(next * (Math.PI/36)) * radius);
+		object.style.left = Math.round(nX) + 'px';
+		object.style.top = Math.round(nY) + 'px';
+		cX = nX;
+		cY = nY;
+		next++;
+		setTimeout ('animateObjectCircle()',animateSpeed);
+	}
+	else {
+		object.style.left = fX + 'px';
+		object.style.top = fY + 'px';
+	}
+	return;
+}
+</script>
+<style type="text/css" media="screen">
+body { 
+	font-size: 1.2em;
+	font-family: Georgia, "Times New Roman", times, serif;
+	color: #000000;
+	background-color: #ccc;
+	margin: 8px;
+}
+#madHatter {
+	position: absolute;
+	left: 200px;
+	top: 50px;
+	}
+
+</style>
+</head>
+<body onload="initAnimateCircle('madHatter',10)">
+<div id="madHatter"> <img src="alice39.gif" height="163" width="200" alt="The Mad Hatter" /> <h3 class="return">Return to the <a href="lesson0702.html">lesson page</a></h3>.</div>
+<p>This page may not work properly in Internet Explorer. The code passes all validations (HTML, CSS and JavaScript) and functions well in Firefox, Opera and Safari.</p>
+</body>
+</html>

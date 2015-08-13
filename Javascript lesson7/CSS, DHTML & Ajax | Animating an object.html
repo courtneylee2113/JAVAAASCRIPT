@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CSS, DHTML &amp; Ajax | Animating an object</title>
+<script type="text/javascript">
+var animateSpeed = 5; // Higher Number = Faster Animation
+var object = null;
+var fX = null; //Final x position
+var fY = null; //Final y position
+var cX = null; //Current x position
+var cY = null; //Current y position
+var dX = null;
+var dY = null;
+var stepX = null;
+var stepY = null;
+var slope = null;
+
+function initAnimate(objectID,x,y) {
+	object = document.getElementById(objectID);
+	fX = x;
+	fY = y;
+	cX = object.offsetLeft;
+	cY = object.offsetTop;
+	dX = Math.abs(fX-cX);
+	dY = Math.abs(fY-cY);
+	if ((dX == 0) || (dY == 0)) slope = 0;
+	else slope= dY/dX;
+		if (dX>=dY) {
+			if (cX<fX) stepX =  animateSpeed;
+			else if (cX>fX) stepX = - animateSpeed;
+			if (cY<fY) stepY = animateSpeed*slope;
+			else if (cY>fY) stepY =  -animateSpeed*slope;
+		}
+		else if (dX<dY)  {
+			if (cY<fY) stepY= animateSpeed;
+			else if (cY>fY) stepY=  - animateSpeed;
+			if (cX<fX) stepX = animateSpeed/slope;
+			else if (cX>fX) stepX =  -animateSpeed/slope;
+		}
+	animateObject()
+}
+
+function animateObject()  {
+	if (( dX > 0  ) || (dY > 0)) {
+		object.style.left = Math.round(cX) + 'px';
+		object.style.top = Math.round(cY) + 'px';
+		cX = cX + stepX;
+		cY = cY + stepY;
+		dX = dX - Math.abs(stepX);
+		dY = dY - Math.abs(stepY);
+		setTimeout ('animateObject()',0);
+	}
+  else {
+	object.style.left = fX + 'px';
+	object.style.top = fY + 'px';
+}
+	return;
+}
+</script>
+<style type="text/css" media="screen">
+body { 
+	font-size: 1.2em;
+	font-family: Georgia, "Times New Roman", times, serif;
+	color: #000000;
+	background-color: #ccc;
+	margin: 8px;
+}
+#madHatter {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	}
+
+</style>
+</head>
+<body onload="initAnimate('madHatter',300,250)">
+<div id="madHatter"> <img src="alice39.gif" height="163" width="200" alt="The Mad Hatter" />
+<h3 class="return">Return to the <a href="lesson0702.html">lesson page</a>.</div>
+<p>This page may not work properly in Internet Explorer. The code passes all validations (HTML, CSS and JavaScript) and functions well in Firefox, Opera and Safari.</p>
+</body>
+</html>

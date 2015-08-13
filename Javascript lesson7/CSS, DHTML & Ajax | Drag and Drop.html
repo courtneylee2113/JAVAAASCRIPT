@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>CSS, DHTML &amp; Ajax | Drag and Drop</title>
+<script type="text/javascript">
+
+var object = null;
+var cX =  0;
+var cY = 0;
+
+function initPage () {
+	document.onmousedown = pickIt;
+	document.onmousemove = dragIt;
+	document.onmouseup = dropIt;
+}
+
+function pickIt(evt) {
+	var objectID = (evt.target) ? evt.target.id : ((evt.srcElement) ? evt.srcElement.id : null);
+	var evt = (evt) ? evt : ((window.event) ? event : null);
+	if (objectID.indexOf('chip')!=-1)  object = document.getElementById(objectID);
+	if (object) { 
+		object.style.zIndex = 100;
+		cX = evt.clientX - object.offsetLeft;
+		cY = evt.clientY - object.offsetTop;
+		return;
+	}
+	else {
+		object = null;
+		return;
+	}
+}
+function dragIt(evt) {
+	evt = (evt) ? evt : ((window.event) ? event : null);
+	if (object) {
+		object.style.left = evt.clientX - cX + 'px';
+		object.style.top = evt.clientY - cY + 'px';
+		return false;
+	}
+}
+
+function dropIt() {
+	if (object) {	
+		object.style.zIndex = 0;
+		object = null;
+		return false;
+	}
+}
+
+</script>
+<style type="text/css">
+
+body { 
+	font-size: 1.2em;
+	font-family: Georgia, "Times New Roman", times, serif;
+	color: #000000;
+	background-color: #ccc;
+	margin: 8px;
+}
+.chip {
+	position: absolute;
+	padding: 8px;
+	border: 1px solid #333;
+	border-right: 3px solid #333;
+	border-bottom: 3px solid #333;
+	background-color: #fff;
+	cursor: move;
+	z-index: 0;
+	}
+
+#chip1 {
+	top: 123px;
+	left: 225px
+	}
+
+#chip2 {
+	top: 5px;
+	left: 25px
+	}
+
+#chip3 {
+	top: 200px;
+	left: 45px
+	}
+
+#chip4 {
+	top: 55px;
+	left: 55px
+	}
+
+#chip5 {
+	top: 150px;
+	left: 60px
+	}
+
+#chip6 {
+	top: 75px;
+	left: 125px
+	}
+</style>
+</head>
+<body onload="initPage()">
+<div id="chip1" class="chip">One</div> 
+<div id="chip2" class="chip">Ring</div> 
+<div id="chip3" class="chip">to</div> 
+<div id="chip4" class="chip">Rule</div> 
+<div id="chip5" class="chip">Them</div> 
+<div id="chip6" class="chip">All</div>
+<h3>Return to the <a href="lesson0706.html">lesson page</a></h3>.
+<p>This page may not work properly in Internet Explorer. The code passes all validations (HTML, CSS and JavaScript) and functions well in Firefox, Opera and Safari.</p>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>CSS, DHTML, &amp; Ajax | Using Input From a Form Field</title>
+<script language="JavaScript" type="text/javascript">
+function moveObjectTo(objectID,formNum) {
+	x = document.forms[formNum].xVal.value;
+	y = document.forms[formNum].yVal.value;
+	var object = document.getElementById(objectID);
+	object.style.left = x + 'px';
+	object.style.top= y + 'px';
+	return false;
+}
+</script>
+<style type="text/css">
+#dash {
+	 visibility: visible; 
+	 position: absolute; 
+	 top: 36px; 
+	 left: 137px
+}
+</style>
+
+</head>
+<body>
+<div id="dash">
+<img src="dash.jpg" height="203" width="150" alt="boy running" /><h3 class="return">Return to the <a href="lesson0704.html">lesson page</a></h3>.
+<p>This page may not work properly in Internet Explorer. The code passes all validations (HTML, CSS and JavaScript) and functions well in Firefox, Opera and Safari.</p></div>
+<form id="newX" action="#" method="get">
+  x:
+  <input type="text" name="xVal" size="3" />
+  <br />
+  y:
+  <input type="text" name="yVal" size="3" />
+  <br />
+  <input onclick="moveObjectTo('dash',0)" type="button" value="Move" />
+</form>
+
+</body>
+</html>

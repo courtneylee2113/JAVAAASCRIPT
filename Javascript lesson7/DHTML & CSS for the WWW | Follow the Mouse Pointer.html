@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>DHTML &amp; CSS for the WWW | Follow the Mouse Pointer</title>
+<script language="JavaScript" type="text/javascript">
+
+
+function initPage() { 
+	document.onmousemove = followMe;
+}
+
+function followMe(evt) {
+	var evt = (evt) ? evt : ((window.event) ? event : null);
+	var object = document.getElementById('spotLight');
+		object.style.left = evt.clientX - (object.offsetWidth/2) + 'px';
+		object.style.top = evt.clientY - (object.offsetHeight/2) + 'px';
+		return;
+}
+</script>
+<style type="text/css" media="screen">
+body { 
+	margin: 8px;
+	color: black;
+	background-color: black;
+	cursor: crosshair;
+}
+#spotLight {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	background: url(spotLight.gif) black no-repeat;
+	z-index: 0;
+	top: 20px;
+	left: 20px
+}
+
+#content {
+	font: bold 40px fantasy;
+	position: absolute;
+	z-index: 100;
+	top: 100px;
+	left: 100px
+}
+</style>
+</head>
+<body onload="initPage()">
+<div id="spotLight"></div>
+<div id="content">Are you afraid of the dark?<br/><h3 class="return">Return to the <a href="lesson0705.html">lesson page</a></h3>.
+<p>This page may not work properly in Internet Explorer. The code passes all validations (HTML, CSS and JavaScript) and functions well in Firefox, Opera and Safari.</p></div>
+</body>
+</html>
